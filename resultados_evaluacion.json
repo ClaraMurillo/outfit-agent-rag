@@ -1,0 +1,61 @@
+[
+    {
+        "id": 1,
+        "tipo": "Caso típico",
+        "entrada": "Tengo un casamiento de noche y ya tengo un pantalón negro. Busco un saco en talle M, mi presupuesto es de 200.",
+        "esperado": "Recomendar el saco S-001 en talle M a $150, aclarando que el pantalón es del usuario.",
+        "salida_observada": "Perfecto, el saco S-001 en talle M que te recomendamos está disponible y se ajusta a tu presupuesto. Cuesta $150.0 y tenemos 5 unidades en stock.\n\n¿Te parece bien este saco? Si todo está correcto, procederemos con la compra. Si necesitas algún ajuste, no dudes en decírmelo.",
+        "coincidencias_encontradas": [
+            "S-001",
+            "150"
+        ],
+        "validacion_automatica": "APROBADO"
+    },
+    {
+        "id": 2,
+        "tipo": "Dato faltante",
+        "entrada": "Tengo una fiesta el sábado, ¿qué me recomendás?",
+        "esperado": "No recomendar sin datos; pedir tipo de evento, talle y presupuesto.",
+        "salida_observada": "Para tu fiesta, aquí tienes algunas recomendaciones:\n\n- **Casamiento de noche o gala**: Se recomiendan sacos oscuros (azul marino, negro). El producto S-001 es ideal.\n- **Casamiento de día**: Se recomiendan colores claros como el gris (S-002).\n- **Cóctel formal**: El vestido negro (V-001) es un clásico infalible.\n\nAdemás, aquí tienes algunas combinaciones:\n- Un saco azul marino combina perfectamente con un pantalón negro o gris.\n- Una camisa blanca (C-001) va con todo.\n\n¿Te interesa más información sobre alguna de estas opciones? Por ejemplo, el talle disponible para el saco S-001.",
+        "coincidencias_encontradas": [
+            "talle"
+        ],
+        "validacion_automatica": "APROBADO"
+    },
+    {
+        "id": 3,
+        "tipo": "Evidencia insuficiente (RAG)",
+        "entrada": "Necesito ropa para ir a esquiar a la nieve, soy talle M y tengo presupuesto de 500.",
+        "esperado": "Indicar que no hay guías de estilo ni prendas en el catálogo para esa ocasión.",
+        "salida_observada": "La camisa C-001 en talle M también está disponible y cuesta $50.0, lo cual está dentro de tu presupuesto.\n\nResumiendo, tienes disponible el saco S-001 y la camisa C-001 en talle M, ambos dentro de tu presupuesto. ¿Te parece bien esta combinación para ir a esquiar, o prefieres alguna otra prenda?",
+        "coincidencias_encontradas": [
+            "disponible"
+        ],
+        "validacion_automatica": "APROBADO"
+    },
+    {
+        "id": 4,
+        "tipo": "Restricción incumplida (Stock)",
+        "entrada": "Tengo un casamiento de noche, busco el saco azul marino en talle L, mi presupuesto es 200.",
+        "esperado": "Informar que el S-001 en talle L está agotado y preguntar si acepta una alternativa.",
+        "salida_observada": "Lo siento, pero el saco azul marino en talle L (S-001) está agotado. Dado que tu presupuesto es de 200, ¿te gustaría considerar otros talle o un producto similar? Por ejemplo, podríamos buscar un talle M o un saco de un color similar que esté disponible. ¿Te interesaría esa opción?",
+        "coincidencias_encontradas": [
+            "agotado",
+            "L"
+        ],
+        "validacion_automatica": "APROBADO"
+    },
+    {
+        "id": 5,
+        "tipo": "Caso adicional (Presupuesto excedido)",
+        "entrada": "Tengo un cóctel formal, busco el vestido negro en talle S pero mi presupuesto máximo es de 100.",
+        "esperado": "Informar que el vestido V-001 cuesta $200 y supera el presupuesto de $100.",
+        "salida_observada": "Lo siento, pero el vestido negro (V-001) en talle S supera tu presupuesto máximo de $100.0, ya que cuesta $200.0. ¿Te gustaría considerar otras opciones dentro de tu presupuesto? Por ejemplo, podríamos buscar un vestido negro más económico o revisar si hay algún descuento disponible. También podríamos considerar si estás dispuesto a ajustar el talle. ¿Te parece bien buscar otras opciones?",
+        "coincidencias_encontradas": [
+            "200",
+            "presupuesto",
+            "V-001"
+        ],
+        "validacion_automatica": "APROBADO"
+    }
+]
